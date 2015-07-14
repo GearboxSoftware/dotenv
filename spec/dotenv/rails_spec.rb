@@ -50,15 +50,15 @@ describe Dotenv::Railtie do
       expect(Spring.watcher.items).to include(path)
     end
 
-    it "loads .env, .env.local, and .env.#{Rails.env}" do
+    it "loads .env, .env.#{Rails.env}.local, and .env.#{Rails.env}" do
       expect(Spring.watcher.items).to eql([
-        Rails.root.join(".env.local").to_s,
+        Rails.root.join(".env.test.local").to_s,
         Rails.root.join(".env.test").to_s,
         Rails.root.join(".env").to_s
       ])
     end
 
-    it "loads .env.local before .env" do
+    it "loads .env.#{Rails.env}.local before .env" do
       expect(ENV["DOTENV"]).to eql("local")
     end
 

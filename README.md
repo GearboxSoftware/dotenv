@@ -119,7 +119,7 @@ dotenv was originally created to load configuration variables into `ENV` in *dev
 
 However, some find dotenv to be a convenient way to configure Rails applications in staging and production environments, and you can do that by defining environment-specific files like `.env.production` or `.env.test`.
 
-You can also use `.env.local` for local overrides.
+You can also use `.env.<environment>.local` for local overrides.
 
 If you use this gem to handle env vars for multiple Rails environments (development, test, production, etc.), please note that env vars that are general to all environments should be stored in `.env`. Then, environment specific env vars should be stored in `.env.<that environment's name>`. When you load a certain environment, dotenv will first load general env vars from `.env`, then load environment specific env vars from `.env.<current environment>`. Variables defined in `.env.<current environment>` will override any values set in `.env` or already defined in the environment.
 
