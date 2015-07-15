@@ -1,6 +1,7 @@
 #!/usr/bin/env rake
 
 require "bundler/gem_helper"
+require "ci/reporter/rake/rspec"
 
 namespace "dotenv" do
   Bundler::GemHelper.install_tasks :name => "dotenv"

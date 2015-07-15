@@ -1,3 +1,6 @@
+require "simplecov"
+SimpleCov.start
+
 require "dotenv"
 
 RSpec.configure do |config|
