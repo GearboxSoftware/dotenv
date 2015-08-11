@@ -64,8 +64,18 @@ describe Dotenv::Parser do
       .to eql("FOO" => "test", "BAR" => "foo${FOO} test")
   end
 
-  it "escapes '$' characters at the end of a value" do
+  it "unescapes escaped '$' characters at the end of a value" do
     expect(env('FOO="\$bar\$"')).to eql("FOO" => "$bar$")
+  end
+
+  it "unescapes adjacently escaped '$' characters" do
+    expect(env('FOO="\$\$\$"')).to eql("FOO" => "$$$")
+  end
+
+  it "unescapes '$' characters followed by various symbols" do
+    expect(env('FOO="\$*"')).to eql("FOO" => "$*")
+    expect(env('FOO="\$^"')).to eql("FOO" => "$^")
+    expect(env('FOO="\$#"')).to eql("FOO" => "$#")
   end
 
   it "parses yaml style options" do

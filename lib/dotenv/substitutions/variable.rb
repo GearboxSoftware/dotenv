@@ -13,9 +13,10 @@ module Dotenv
           (\\)?          # is it escaped with a backslash?
           (\$)           # literal $
           \{?            # allow brace wrapping
-          ($|[A-Z0-9_]+) # match the variable
+          (?=$|[^()])    # require that the next character either be the end of line or non-parenthesis
+          ([\w]+)?       # match the variable (or the lack thereof)
           \}?            # closing brace
-        /xi
+        /x
 
         def call(value, env)
           value.gsub(VARIABLE) do |variable|
@@ -23,7 +24,7 @@ module Dotenv
 
             if match[1] == '\\'
               variable[1..-1]
-            else
+            elsif match[3] != nil
               env.fetch(match[3]) { ENV[match[3]] }
             end
           end
