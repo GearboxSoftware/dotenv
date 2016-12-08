@@ -9,7 +9,7 @@ Gem::Specification.new "dotenv-rails", Dotenv::VERSION do |gem|
   gem.license       = "MIT"
   gem.files         = `find lib -type f | grep rails`.split($OUTPUT_RECORD_SEPARATOR) + ['README.md', 'LICENSE']
   gem.add_dependency "dotenv", Dotenv::VERSION
-  gem.add_dependency "railties", "~>4.0"
+  gem.add_dependency "railties", ">= 4.0", "< 5.1"
 
   gem.add_development_dependency "spring"
 end
